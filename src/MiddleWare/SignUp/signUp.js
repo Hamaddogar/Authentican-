@@ -1,6 +1,8 @@
 import axios from 'axios';
 import history from '../../histort'
 import jwtdecode from 'jwt-decode'
+ import store   from '../../store/configureStore'
+  import {ADD_SIGNUP} from '../../store/actions/actionTypes'
 
 export  const signUpHandler = (userName, userEmail, userPassword) => {
  
@@ -15,13 +17,10 @@ export  const signUpHandler = (userName, userEmail, userPassword) => {
     })
     .then(function(response) {
       console.log("this is console",response.data);
-
-       if(response.data.success===true)
-       {
-      history.push('/login')
-       }
-     
-
+        store.store.dispatch({
+          type:ADD_SIGNUP,
+           payload:response.data
+        })
 
       
 

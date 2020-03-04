@@ -4,6 +4,7 @@ import { InfoCircleOutlined, UserOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 
 import { signUpHandler } from "../MiddleWare/SignUp/signUp.js";
+import { connect } from 'react-redux';
 class Signup extends React.Component {
   state = {
     userName: "",
@@ -28,9 +29,13 @@ class Signup extends React.Component {
       this.state.userEmail,
       this.state.userPassword
     );
+   
   };
 
   render() {
+   
+ 
+    
     return (
       <div>
         <Input
@@ -52,9 +57,17 @@ class Signup extends React.Component {
 
         <Button onClick={this.signUpFunction}> Signup</Button>
         <Link to="/login">login</Link>
+
+        <div> All data</div>
+        <h5>Name</h5>{this.props.signreducer.data.userName}
+        <br/>
+      
+
       </div>
     );
   }
 }
+const mapStateToProps = state => ({ signreducer: state })
 
-export default Signup;
+
+    export default (connect(mapStateToProps)(Signup));
